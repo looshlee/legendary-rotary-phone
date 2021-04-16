@@ -5,14 +5,15 @@ name: CI
 # Controls when the action will run. 
 on:
   push:
-    tags:
-    - v*-TST
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   one:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Debug Tag Branch
       run: |
         echo "github.ref: ${{ github.ref }}"
@@ -27,3 +28,5 @@ jobs:
         GITHUB_CONTEXT: ${{ toJSON(github) }}
       run: echo "$GITHUB_CONTEXT"
 
+#     - name: git contains
+#       run: git branch --contains 
